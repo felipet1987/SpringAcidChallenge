@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: hello.HelloControllerTests
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 5.194 sec <<< FAILURE! - in hello.HelloControllerTests
+noParamGreetingShouldReturnDefaultMessage(hello.HelloControllerTests)  Time elapsed: 0.256 sec  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "$.content", exception: Expected to find an object with property ['content'] in path $ but found 'java.lang.String'. This is not a json object according to the JsonProvider: 'com.jayway.jsonpath.spi.json.JsonSmartJsonProvider'.
+	at org.springframework.test.util.JsonPathExpectationsHelper.evaluateJsonPath(JsonPathExpectationsHelper.java:245)
+	at org.springframework.test.util.JsonPathExpectationsHelper.assertValue(JsonPathExpectationsHelper.java:99)
+	at org.springframework.test.web.servlet.result.JsonPathResultMatchers$2.match(JsonPathResultMatchers.java:99)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:171)
+	at hello.HelloControllerTests.noParamGreetingShouldReturnDefaultMessage(HelloControllerTests.java:50)
+
