@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl"> 
+
+
+<h1>{{datos}}</h1>
+
+
+
+
+<input id="file" type="file"/>
+<button ng-click="enviar()">OK</button>
+
+
+
+
+</div>
+
+
+<script>
+
+
+
+
+
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+
+
+
+	$http.get("http://localhost:8080/users")
+	.then(function(response) {
+	  $scope.datos = response.data;
+	});
+
+	$scope.enviar = function() {
+
+
+		$scope.files = document.getElementById('file').files;
+
+		if ($scope.files.length > 0) {
+		 	$scope.getBase64($scope.files[0]);
+		}
+
+
+          
+	};
+	$scope.getBase64 = function(file){
+
+	   var reader = new FileReader();
+	   reader.readAsDataURL(file);
+	   reader.onload = function () {
+
+	   		console.log(reader.result.split(',')[1])
+	     	$scope.image = reader.result.split(',')[1]
+            var data = {
+                "name": "usuario1",
+                "image": $scope.image 
+            };
+
+            var config = {
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            }            
+            url = "http://localhost:8080/users"
+			$http.post(url, data, config)
+			   .then(
+			       function(response){
+			         // success callback
+			         console.log("success")
+			       }, 
+			       function(response){
+			         // failure callback
+			         console.log(response)
+			       }
+			    );  
+	   };
+	   reader.onerror = function (error) {
+	     console.log('Error: ', error);
+	   };
+	}
+
+
+
+});
+
+
+
+
+
+</script>
+
+</body>
+</html>
