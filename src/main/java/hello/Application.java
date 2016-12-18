@@ -46,7 +46,7 @@ public class Application {
 			log.info("Customers found with findAll():");
 			log.info("-------------------------------");
 			for (User user : repository.findAll()) {
-				log.info(user.getName());
+				log.info(user.getUserName());
 			}
 			log.info("");
 

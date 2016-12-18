@@ -6,25 +6,18 @@
 <div ng-app="myApp" ng-controller="myCtrl"> 
 
 
-<h1>{{datos}}</h1>
+<h4>{{mensaje}}</h4>
 
 
 
-
+First name: <input type="text" ng-model="userName"><br>
 <input id="file" type="file"/>
 <button ng-click="enviar()">OK</button>
-
-
-
 
 </div>
 
 
 <script>
-
-
-
-
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
@@ -40,10 +33,9 @@ app.controller('myCtrl', function($scope, $http) {
 
 
 		$scope.files = document.getElementById('file').files;
+	 	$scope.getBase64($scope.files[0]);
 
-		if ($scope.files.length > 0) {
-		 	$scope.getBase64($scope.files[0]);
-		}
+
 
 
           
@@ -51,46 +43,52 @@ app.controller('myCtrl', function($scope, $http) {
 	$scope.getBase64 = function(file){
 
 	   var reader = new FileReader();
-	   reader.readAsDataURL(file);
-	   reader.onload = function () {
 
-	   		console.log(reader.result.split(',')[1])
-	     	$scope.image = reader.result.split(',')[1]
-            var data = {
-                "name": "usuario1",
-                "image": $scope.image 
-            };
+		if ($scope.files.length > 0) {
+			reader.readAsDataURL(file);
+			reader.onload = function () {
 
-            var config = {
-                headers : {
-                    'Content-Type': 'application/json'
-                }
-            }            
-            url = "http://localhost:8080/users"
-			$http.post(url, data, config)
-			   .then(
-			       function(response){
-			         // success callback
-			         console.log("success")
-			       }, 
-			       function(response){
-			         // failure callback
-			         console.log(response)
-			       }
-			    );  
-	   };
-	   reader.onerror = function (error) {
-	     console.log('Error: ', error);
-	   };
+		 		$scope.image = reader.result.split(',')[1]
+		 		if($scope.userName == null) $scope.userName = ""
+		 		//console.log($scope.image)
+
+		        var data = {
+		            "userName": $scope.userName,
+		            "image": $scope.image 
+		        };
+		        var config = {
+		            headers : {
+		                'Content-Type': 'application/json'
+		            }
+		        }            
+		        url = "http://localhost:8080/users"
+				$http.post(url, data, config)
+				   .then(
+				       function(response){
+				         // success callback
+				         console.log(response)
+				         $scope.mensaje = response.status + ":OK"
+				       }, 
+				       function(response){
+				         // failure callback
+				         console.log(response)
+				         $scope.mensaje = response.status + ":" + response.data.message
+
+				       }
+				    );  
+		   };
+		   reader.onerror = function (error) {
+		     console.log('Error: ', error);
+		   };
+		}
+		else
+		{
+			$scope.mensaje = "400: Bad Request"
+		}
+
+
 	}
-
-
-
 });
-
-
-
-
 
 </script>
 

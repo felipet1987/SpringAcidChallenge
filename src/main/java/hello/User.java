@@ -13,15 +13,15 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String name;
+    private String userName;
     
     @Column(columnDefinition="text")
     private String image;
 
     protected User() {}
 
-    public User(String firstName, String image) {
-        this.name = firstName;
+    public User(String userName, String image) {
+        this.userName = userName;
         this.image = image;
     }
 
@@ -33,8 +33,8 @@ public class User {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
 	public String getImage() {

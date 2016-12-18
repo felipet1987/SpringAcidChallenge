@@ -13,7 +13,7 @@ public class UserService {
 	
 	boolean isAuthorized(User user) {
 		// TODO Auto-generated method stub
-		if(user.getName().equals("usuario1")) return true;
+		if(user.getUserName().equals("usuario1")) return true;
 		return false;
 	}
 
