@@ -2,7 +2,7 @@
 
 ### Levantar WebApp
 
-ejecutar comando en el directorio del repo
+Ejecutar comando en el directorio del repo
 
 ```bash
 mvnw spring-boot:run
@@ -10,12 +10,12 @@ mvnw spring-boot:run
 
 ### acceder al WebApp
 
-acceder al siguiente link: http://localhost:8080/
+Acceder al siguiente link: http://localhost:8080/
 
 
-### descripcion de los servicios
+### Descripcion de los servicios
 
-#### subir imagen
+#### Subir imagen
 
 ```
 POST : http://localhost:8080/users
@@ -33,20 +33,20 @@ image: imagen codificada en base64
 solo usuario "usuario1"  esta autorizado para subir imagen
 ```
 
-#### obtener imagen
+#### Obtener imagen
 ```
 GET : http://localhost:8080/users/1
 ```
 Descripcion
 
-devuelve la imagen guardada
+Devuelve la imagen guardada
 
 
 
 
 ### correr pruebas de los servicios
 
-ejecutar comando en el directorio del repo
+Ejecutar comando en el directorio del repo
 
 ```bash
 mvnw test
