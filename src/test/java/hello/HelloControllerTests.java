@@ -60,7 +60,7 @@ public class HelloControllerTests {
 	        assertTrue(true);
 	    }
 	    @Test
-	    public void postTest() throws Exception {
+	    public void subirImagenTest() throws Exception {
 	    	
 	    	User user = new User("usuario1","imagen");		
 	    			
@@ -71,7 +71,20 @@ public class HelloControllerTests {
 	         .content(json)
 	         .accept(MediaType.APPLICATION_JSON))
 	         .andExpect(status().is2xxSuccessful());
-	    }    
+	    }  
+	    @Test
+	    public void subirImagenConUsuarioNoAutorizadoTest() throws Exception {
+	    	
+	    	User user = new User("usuario2","imagen");		
+	    			
+	      String json = mapper.writeValueAsString(user);
+	      
+	      mockMvc.perform(post("/users")
+	         .contentType(MediaType.APPLICATION_JSON)
+	         .content(json)
+	         .accept(MediaType.APPLICATION_JSON))
+	         .andExpect(status().is4xxClientError());
+	    }	    
 	    
 
     	
