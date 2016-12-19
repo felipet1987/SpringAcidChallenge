@@ -35,11 +35,11 @@ solo usuario "usuario1"  esta autorizado para subir imagen
 
 #### obtener imagen
 ```
-GET : http://localhost:8080/users
+GET : http://localhost:8080/users/1
 ```
 Descripcion
 
-devuelve una imagen
+devuelve la imagen guardada
 
 
 
